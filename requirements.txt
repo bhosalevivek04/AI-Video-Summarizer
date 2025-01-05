@@ -1,0 +1,6 @@
+streamlit
+phi-agent
+google-generativeai
+python-dotenv
+pathlib
+duckduckgo-search 
