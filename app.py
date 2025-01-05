@@ -411,13 +411,32 @@ if video_file:
                     'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 })
 
-                # Changed from PDF to TXT
-                st.download_button(
-                    label="📥 Download Analysis as TXT",
-                    data=response.content,
-                    file_name=f"analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt",
-                    mime="text/plain"
-                )
+                # Fix download functionality
+                try:
+                    # Convert response content to string if it's not already
+                    download_content = str(response.content)
+                    
+                    # Create a formatted text with metadata
+                    download_text = f"""Video Analysis Report
+Generated on: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+Video: {video_file.name}
+Query: {user_query}
+Language: {language}
+Analysis Depth: {analysis_depth}
+
+Analysis Results:
+{download_content}
+"""
+                    
+                    st.download_button(
+                        label="📥 Download Analysis as TXT",
+                        data=download_text,
+                        file_name=f"video_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt",
+                        mime="text/plain",
+                        key="download_button"
+                    )
+                except Exception as e:
+                    st.error(f"Error preparing download: {str(e)}")
 
         except Exception as error:
             st.error(f"An error occurred during analysis: {error}")
