@@ -1,5 +1,5 @@
 streamlit
-phi-agent
+phidata
 google-generativeai
 python-dotenv
 pathlib
