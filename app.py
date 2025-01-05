@@ -21,10 +21,53 @@ if API_KEY:
     genai .configure(api_key=API_KEY)
 
 st.set_page_config(
-    page_title="Multimodal AI Agent- Video Summarizer",
+    page_title="Video AI Summarizer | Analyze Videos with AI",
     page_icon="🎥",
-    layout="wide"
-)  
+    layout="wide",
+    menu_items={
+        'Get Help': 'https://github.com/bhosalevivek04/AI-Video-Summarizer',
+        'Report a bug': 'https://github.com/bhosalevivek04/AI-Video-Summarizer/issues',
+        'About': """
+        ## Video AI Summarizer
+        Analyze videos using advanced AI technology powered by Gemini.
+        
+        - ✨ Multi-language support (English, Hindi, Marathi)
+        - 🎯 Multiple analysis depths
+        - 📊 Detailed insights and summaries
+        """
+    }
+)
+
+# Add meta tags and description
+st.markdown("""
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AI-powered video analysis tool that provides summaries and insights in multiple languages. Upload your video and get instant analysis.">
+    <meta name="keywords" content="video analysis, AI summarizer, video insights, Gemini AI, video summary, Hindi analysis, Marathi analysis">
+    <meta name="author" content="Your Name">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Video AI Summarizer | Analyze Videos with AI">
+    <meta property="og:description" content="Get instant AI-powered video analysis in English, Hindi, and Marathi">
+    <meta property="og:image" content="your-preview-image-url">
+    <meta property="og:url" content="your-app-url">
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebApplication",
+        "name": "Video AI Summarizer",
+        "description": "AI-powered video analysis tool with multi-language support",
+        "applicationCategory": "Multimedia Analysis Tool",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+""", unsafe_allow_html=True)
 
 # Add custom styling
 st.markdown("""
@@ -110,12 +153,47 @@ st.markdown("""
     .loading {
         animation: pulse 1.5s infinite;
     }
+    
+    /* Add padding to main content to prevent overlap with footer */
+    .main {
+        margin-bottom: 100px;
+    }
+    
+    /* Add padding to footer */
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #f8f9fa;
+        padding: 10px;
+        text-align: center;
+        border-top: 1px solid #ddd;
+        z-index: 999;
+    }
     </style>
 """, unsafe_allow_html=True)
 
-# Main title with icon and subtitle
-st.markdown("<h1 class='main-title'>Phidata Video AI Summarizer Agent 🎥</h1>", unsafe_allow_html=True)
-st.markdown("<p class='sub-title'>Powered by Gemini 2.0 Flash Exp</p>", unsafe_allow_html=True)
+# Update main title with keywords
+st.markdown("""
+    <h1 class='main-title'>Video AI Summarizer & Analysis Tool 🎥</h1>
+    <p class='sub-title'>Instant Video Analysis in English, Hindi & Marathi | Powered by Gemini AI</p>
+""", unsafe_allow_html=True)
+
+# Update the footer styling
+st.markdown("""
+    <div class="main">
+        <!-- Your main content is here -->
+    </div>
+    
+    <div class="footer">
+        <p style='color: #666; font-size: 0.8em; margin: 0;'>
+            Video Analysis | AI Summary | Multi-language Support | Instant Insights
+            <br>
+            Powered by Advanced AI Technology
+        </p>
+    </div>
+""", unsafe_allow_html=True)
 
 with st.sidebar:
     st.title("⚙️ Settings")
@@ -126,7 +204,7 @@ with st.sidebar:
     )
     language = st.selectbox(
         "Response Language",
-        ["English", "Spanish", "French", "German", "Chinese"]
+        ["English", "Hindi", "Marathi"]
     )
 
 @st.cache_resource
@@ -243,10 +321,8 @@ if video_file:
                     # Create language-specific instructions
                     language_instructions = {
                         "English": "Please provide the analysis in English with standard English formatting.",
-                        "Spanish": "Por favor, proporcione el análisis en español, utilizando el formato y estilo apropiados del idioma español.",
-                        "French": "Veuillez fournir l'analyse en français, en utilisant le format et le style appropriés de la langue française.",
-                        "German": "Bitte stellen Sie die Analyse auf Deutsch zur Verfügung, unter Verwendung der entsprechenden deutschen Formatierung und Stil.",
-                        "Chinese": "请用中文提供分析，使用适当的中文格式和风格。"
+                        "Hindi": "कृपया विश्लेषण हिंदी में प्रदान करें, उचित हिंदी भाषा के प्रारूप और शैली का उपयोग करें।",
+                        "Marathi": "कृपया विश्लेषण मराठीमध्ये प्रदान करा, योग्य मराठी भाषेचे स्वरूप आणि शैली वापरा."
                     }
 
                     def get_analysis_points(depth):
