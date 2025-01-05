@@ -165,10 +165,10 @@ st.markdown("""
         left: 0;
         bottom: 0;
         width: 100%;
-        background-color: #f8f9fa;
+        background-color: #4a4a4a;  /* Darker gray background */
         padding: 10px;
         text-align: center;
-        border-top: 1px solid #ddd;
+        border-top: 1px solid #666;
         z-index: 999;
     }
     </style>
@@ -180,14 +180,33 @@ st.markdown("""
     <p class='sub-title'>Instant Video Analysis in English, Hindi & Marathi | Powered by Gemini AI</p>
 """, unsafe_allow_html=True)
 
-# Update the footer styling
+# Update the footer styling with gray colors
 st.markdown("""
+    <style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #4a4a4a;  /* Darker gray background */
+        padding: 10px;
+        text-align: center;
+        border-top: 1px solid #666;
+        z-index: 999;
+    }
+    
+    /* Add padding to main content to prevent overlap with footer */
+    .main {
+        margin-bottom: 100px;
+    }
+    </style>
+    
     <div class="main">
         <!-- Your main content is here -->
     </div>
     
     <div class="footer">
-        <p style='color: #666; font-size: 0.8em; margin: 0;'>
+        <p style='color: #e0e0e0; font-size: 0.8em; margin: 0;'>  <!-- Light gray text -->
             Video Analysis | AI Summary | Multi-language Support | Instant Insights
             <br>
             Powered by Advanced AI Technology
